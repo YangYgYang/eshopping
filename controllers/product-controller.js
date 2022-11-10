@@ -1,6 +1,9 @@
 const productController = {
     getProducts: (req, res, next) => {
-        res.send('products is already')
+        res.json({
+            name:"綠茶籽精華",
+            price:"1300"
+        })
     }
 
 }
