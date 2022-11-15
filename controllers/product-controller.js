@@ -1,7 +1,8 @@
-const { User } = require('../models')
+const {products} = require('../models')
 
 const productController = {
     getProducts: (req, res, next) => {
+        
         res.json({
             name:"綠茶籽精華",
             price:"1300"
@@ -22,7 +23,17 @@ const productController = {
     postProduct:(req, res, next) => {
         const { name, price, short_des, discount, description, categoryId } = req.body
         if (!name) throw new Error('Restaurant name is required!')
-
+        products.create({
+            name,
+            price,
+            short_des,
+            discount,
+            description,
+            categoryId
+        })
+        .then(() => {
+            res.status(201)
+        })
     },
     putProduct:(req, res, next) => {
 
