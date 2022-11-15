@@ -22,7 +22,7 @@ const productController = {
     },
     postProduct:(req, res, next) => {
         // const { name, price, short_des, discount, description, categoryId } = req.body
-        console.log(req)
+        console.log(req.body)
         if (!name) throw new Error('Restaurant name is required!')
         products.create({
             name,
