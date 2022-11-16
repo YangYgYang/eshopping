@@ -26,7 +26,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       sales: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       create_at: {

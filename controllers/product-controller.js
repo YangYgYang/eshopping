@@ -21,16 +21,14 @@ const productController = {
 
     },
     postProduct:(req, res, next) => {
-        // const { name, price, short_des, discount, description, categoryId } = req.body
-        console.log(req.body)
-        if (!name) throw new Error('Restaurant name is required!')
+        const { name, price } = req.body
+        console.log('看req有什麼',req)
+        console.log('看巴底有什麼',req.body)
+        // res.status(201)
+        if (!name) throw new Error('Product name is required!')
         products.create({
             name,
-            price,
-            short_des,
-            discount,
-            description,
-            categoryId
+            price
         })
         .then(() => {
             res.status(201)
