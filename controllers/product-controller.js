@@ -21,13 +21,17 @@ const productController = {
     },
     postProduct:(req, res, next) => {
         const { name, price } = req.body
-        if (!name) throw new Error('Product name is required!')
+        if (!name || !price) throw new Error('Product name and Price is required!')
         return products.create({
             name:name,
             price:price
         })
         .then(() => {
-            res.status(201)
+            res
+            .status(200)
+            .json({
+                message: 'Create product success!',
+            })
         })
         .catch(err => console.log(err))
     },
