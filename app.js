@@ -3,7 +3,9 @@ const app = express()
 const port = 8080 || process.env.port
 const routes = require('./routes')
 const cors = require('cors')
+const bodyParser = require('body-parser')
 
+app.use(bodyParser.urlencoded({ extended: true }))
 //前端網址出來，要修改
 // const corsOptions = {
 //   origin: [
