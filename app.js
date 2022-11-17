@@ -5,7 +5,8 @@ const routes = require('./routes')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
-app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 //前端網址出來，要修改
 // const corsOptions = {
 //   origin: [

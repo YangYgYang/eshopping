@@ -28,22 +28,14 @@ module.exports = {
       sales: {
         type: Sequelize.INTEGER
       },
-      create_at: {
+      createdAt: {
         type: Sequelize.DATE
       },
-      update_at: {
+      updatedAt: {
         type: Sequelize.DATE
       },
       img: {
         type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
   },
