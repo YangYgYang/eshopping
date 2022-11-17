@@ -1,27 +1,27 @@
-const {products} = require('../models')
-const {body,validationResult} = require('express-validator')
+const { products } = require('../models')
+const { body, validationResult } = require('express-validator')
 
 const productController = {
     getProducts: (req, res, next) => {
         res.json({
-            name:"綠茶籽精華",
-            price:"1300"
+            name: "綠茶籽精華",
+            price: "1300"
         })
     },
-    getNewestProducts:(req, res, next) => {
+    getNewestProducts: (req, res, next) => {
 
     },
-    getOnSaleProducts:(req, res, next) => {
+    getOnSaleProducts: (req, res, next) => {
 
     },
-    getHotSaleProducts:(req, res, next) => {
+    getHotSaleProducts: (req, res, next) => {
 
     },
-    getProduct:(req, res, next) => {
+    getProduct: (req, res, next) => {
 
     },
     postProduct: async (req, res, next) => {
-        const { name, price, short_des, discount, description, category_id} = req.body
+        const { name, price, short_des, discount, description, category_id } = req.body
         // console.log(req.body)
         // console.log(typeof name ,typeof price ,typeof short_des,typeof discount,typeof description,typeof category_id)
         // console.log(typeof name !== 'string')
@@ -31,15 +31,12 @@ const productController = {
         // console.log(typeof discount !== Number)
         // console.log(typeof description !== String)
         // console.log(typeof category_id !== Number)
-        if(!name || !price){
-             return res
-            .status(401)
-            .json({
+        if (!name || !price) {
+            return res.status(401).json({
                 message: 'Request have wrong format!',
             })
-            .end()
-        }else{
-             await products.create({
+        } else {
+            await products.create({
                 name,
                 price,
                 short_des,
@@ -47,27 +44,21 @@ const productController = {
                 description,
                 category_id,
             })
-            .then(() => {
-                res
-                .status(200)
-                .json({
-                    message: 'Create product success!',
+                .then(() => {
+                    res.status(200).json({
+                        message: 'Create product success!',
+                    })
                 })
-                .end()
-            })
-            .catch(err => 
-                res
-                .status(401)
-                .json({
-                    message: err,
-                })
-                .end())
+                .catch(err =>
+                    res.status(401).json({
+                        message: err,
+                    }))
         }
     },
-    putProduct:(req, res, next) => {
+    putProduct: (req, res, next) => {
 
     },
-    deleteProduct:(req, res, next) => {
+    deleteProduct: (req, res, next) => {
 
     },
 
