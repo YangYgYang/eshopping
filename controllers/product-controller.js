@@ -3,10 +3,20 @@ const { body, validationResult } = require('express-validator')
 
 const productController = {
     getProducts: (req, res, next) => {
-        res.json({
-            name: "綠茶籽精華",
-            price: "1300"
+        return products.findAll()
+        .then((products)=>{
+            const productsdata = []
+            products.map((product)=>{
+                productsdata.push(product.dataValues)
+            })
+            res.status(200).json({
+                productsdata
+            })
         })
+        .catch(err => {
+            res.status(401).json({
+            message: err
+        })})
     },
     getNewestProducts: (req, res, next) => {
 
@@ -51,7 +61,7 @@ const productController = {
                 })
                 .catch(err =>
                     res.status(401).json({
-                        message: err,
+                        message: err
                     }))
         }
     },
