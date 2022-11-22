@@ -29,4 +29,9 @@ WORKDIR /app
 ENV NODE_ENV production
 ENV PATH /root/.volta/bin:$PATH
 
+ENV MYSQL_DATABASE=eshopping-mysql
+ENV MYSQL_USER=root
+ENV MYSQL_PASSWORD=password
+ENV MYSQL_ROOT_PASSWORD=password
+
 CMD [ "npm", "run", "start" ]

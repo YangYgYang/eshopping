@@ -19,6 +19,23 @@ const productController = {
         })})
     },
     getNewestProducts: (req, res, next) => {
+        //though we only need to order by one column, we still need to put the ordering array inside the order array
+        return products.findAll({
+            order:[['createdAt', 'DESC']]
+        })
+        .then((products)=>{
+            const productsdata = []
+            products.map((product)=>{
+                productsdata.push(product.dataValues)
+            })
+            res.status(200).json({
+                productsdata
+            })
+        })
+        .catch(err => {
+            res.status(401).json({
+            message: err
+        })})
 
     },
     getOnSaleProducts: (req, res, next) => {
