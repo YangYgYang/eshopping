@@ -1,48 +1,51 @@
+const { Op } = require("sequelize")
 const { products } = require('../models')
 const { body, validationResult } = require('express-validator')
 
 const productController = {
-    getProducts: (req, res, next) => {
-        return products.findAll()
-        .then((products)=>{
-            const productsdata = []
+    getProducts:async(req, res, next) => {
+        const ParamKind = req.query.kind
+        const ParamPageSize = req.query.pageSize*1 || 12
+        const ParamPage = req.query.page*1 || 1
+        const state = {}
+        const page ={}
+        if( ParamKind === "newest" ){
+            //though we only need to order by one column, we still need to put the ordering array inside the order array
+            state.order=[['createdAt', 'DESC']]
+        }else if( ParamKind === "onSale" ){
+            state.where = {discount:{[Op.lt]:10}}
+        }else if( ParamKind === "hotSale"){
+            state.order = [['sales', 'DESC']]
+        }
+        const count = await products.count()
+        state.limit = ParamPageSize
+        state.offset = (ParamPage-1) * ParamPageSize
+
+        page.pageSize = ParamPageSize
+        page.page = ParamPage
+        page.totalRecord = count
+
+        if(count%ParamPageSize > 0){
+            page.pageTotal = Math.floor(count/ParamPageSize) + 1
+        }else{
+            page.pageTotal = count/ParamPageSize
+        }
+
+        return products.findAll(state)
+        .then(async(products)=>{
+            const data = []
             products.map((product)=>{
-                productsdata.push(product.dataValues)
+                data.push(product.dataValues)
             })
             res.status(200).json({
-                productsdata
+                page,
+                data
             })
         })
         .catch(err => {
             res.status(401).json({
             message: err
         })})
-    },
-    getNewestProducts: (req, res, next) => {
-        //though we only need to order by one column, we still need to put the ordering array inside the order array
-        return products.findAll({
-            order:[['createdAt', 'DESC']]
-        })
-        .then((products)=>{
-            const productsdata = []
-            products.map((product)=>{
-                productsdata.push(product.dataValues)
-            })
-            res.status(200).json({
-                productsdata
-            })
-        })
-        .catch(err => {
-            res.status(401).json({
-            message: err
-        })})
-
-    },
-    getOnSaleProducts: (req, res, next) => {
-
-    },
-    getHotSaleProducts: (req, res, next) => {
-
     },
     getProduct: (req, res, next) => {
 

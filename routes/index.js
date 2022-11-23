@@ -6,9 +6,7 @@ const admin = require('./modules/admin')
 router.use('/admin', admin)
 
 router.get('/api/products',productController.getProducts)
-router.get('/api/product/newest',productController.getNewestProducts)
-router.get('/api/products/onSale',productController.getOnSaleProducts)
-router.get('/api/products/hotSale',productController.getHotSaleProducts)
+
 router.get('/api/product/:id',productController.getProduct)
 router.post('/api/product',productController.postProduct)
 router.put('/api/product/:id',productController.putProduct)
