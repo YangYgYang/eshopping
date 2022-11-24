@@ -8,16 +8,16 @@ const productController = {
         const ParamPageSize = req.query.pageSize*1 || 12
         const ParamPage = req.query.page*1 || 1
         const state = {}
-        const page ={}
+        const page = {}
         if( ParamKind === "newest" ){
             //though we only need to order by one column, we still need to put the ordering array inside the order array
-            state.order=[['createdAt', 'DESC']]
+            state.order = [['createdAt', 'DESC']]
         }else if( ParamKind === "onSale" ){
             state.where = {discount:{[Op.lt]:10}}
         }else if( ParamKind === "hotSale"){
             state.order = [['sales', 'DESC']]
         }
-        const count = await products.count()
+        const count = await products.count(state)
         state.limit = ParamPageSize
         state.offset = (ParamPage-1) * ParamPageSize
 
