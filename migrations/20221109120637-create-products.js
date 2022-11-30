@@ -36,6 +36,14 @@ module.exports = {
       },
       img: {
         type: Sequelize.STRING
+      },
+      category_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Categories',
+          key: 'id'
+        }
       }
     });
   },
