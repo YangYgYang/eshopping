@@ -16,10 +16,8 @@
   },
   "production": {
     "username": "root",
-    "password": "password",
-    "database": "eshopping",
-    "host": "eshopping-mysql.fly.dev",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "password": "gP4W012VS7p9",
+    "host": "infra.zeabur.com",
+    "port":"32303"
   }
 }

@@ -1,5 +1,5 @@
 const { Op } = require("sequelize")
-const { products,categories } = require('../models')
+const { Products,categories } = require('../models')
 const { body, validationResult } = require('express-validator')
 
 const productController = {
@@ -12,7 +12,6 @@ const productController = {
         if(ParamCategory){
             return categories.findByPK(ParamCategory)
         }
-
         if( req.query.kind === "newest" ){
             //though we only need to order by one column, we still need to put the ordering array inside the order array
             state.order = [['createdAt', 'DESC']]
@@ -28,8 +27,7 @@ const productController = {
             state.order = [['sales', 'DESC']]
         }
 
-
-        const count = await products.count(state)
+        const count = await Products.count(state)
         state.limit = ParamPageSize
         state.offset = (ParamPage-1) * ParamPageSize
 
@@ -43,7 +41,7 @@ const productController = {
             page.pageTotal = count/ParamPageSize
         }
 
-        return products.findAll(state)
+        return Products.findAll(state)
         .then(async(products)=>{
             const data = []
             products.map((product)=>{
@@ -61,7 +59,7 @@ const productController = {
     },
     getProduct: (req, res, next) => {
         const ParamProduct = req.query.id
-        return products.findByPK(ParamProduct)
+        return Products.findByPK(ParamProduct)
         .then((product)=>{
             console.log(product)
             res.status(200).json({
