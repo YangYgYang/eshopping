@@ -1,9 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
-    "database": "eshopping_sequelize",
-    "host": "127.0.0.1",
+    "password": "6103LDsE7u9f",
+    "database": "mysql",
+    "host": "infra.zeabur.com",
+    "port":"30364",
     "dialect": "mysql"
   },
   "test": {
@@ -13,11 +14,5 @@
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
-  },
-  "production": {
-    "username": "root",
-    "password": "gP4W012VS7p9",
-    "host": "infra.zeabur.com",
-    "port":"32303"
   }
 }
