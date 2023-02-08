@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: async(queryInterface, Sequelize) => {
     const categoriesSeed =[
       {
         name: '乳液',
@@ -52,6 +52,7 @@ module.exports = {
         updated_at: new Date()
       },
     ]
+    await queryInterface.bulkInsert('categories', categoriesSeed)
   },
 
   down: async(queryInterface, Sequelize) => {
