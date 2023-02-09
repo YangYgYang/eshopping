@@ -1,5 +1,5 @@
 {
-  "production": {
+  "development": {
     "username": "root",
     "password": "n749ZH1I8Pf6",
     "database": "mysql",
@@ -15,7 +15,7 @@
     "dialect": "mysql",
     "operatorsAliases": false
   },
-  "development": {
+  "production": {
     "username": "root",
     "password": "password",
     "database": "eshopping_sequelize",
