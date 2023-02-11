@@ -52,18 +52,10 @@ module.exports = {
         updated_at: new Date()
       },
     ]
-    await queryInterface.bulkInsert('categories', categoriesSeed)
+    await queryInterface.bulkInsert('Categories', categoriesSeed)
   },
 
   down: async(queryInterface, Sequelize) => {
-		const { sequelize } = queryInterface
-		try {
-			await sequelize.transaction(async transaction => {
-				const options = { transaction }
-				await sequelize.query('TRUNCATE TABLE categories', options)
-			})
-		} catch (error) {
-			console.log(error)
-		}
+    await queryInterface.bulkDelete('Categories', {})
   }
 };

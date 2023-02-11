@@ -84,7 +84,7 @@ module.exports = {
 		try {
 			await sequelize.transaction(async transaction => {
 				const options = { transaction }
-				await sequelize.query('TRUNCATE TABLE products', options)
+				await sequelize.query('TRUNCATE TABLE Products', options)
 			})
 		} catch (error) {
 			console.log(error)
