@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     sort: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Category',
+    modelName: 'Categories',
     tableName: 'categories',
     underscored: true
   })
