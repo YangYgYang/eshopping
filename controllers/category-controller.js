@@ -3,10 +3,15 @@ const { Products,Categories } = require('../models')
 
 const categoryController = {
     getCategories: async(req, res, next) => {
+        const ParamCategory = req.params.type
         try{
-            console.log('是不是分類有進')
-            const categories = await Categories.findAll()
-            console.log(categories)
+            const categories = await Categories.findAll(
+                {
+                nest: true,
+				raw: true,
+                where: { parent_id: ParamCategory }
+                }
+            )
             return res.status(200).json(categories)
         }
         catch (err) { next(err) }
