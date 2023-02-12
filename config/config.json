@@ -1,10 +1,10 @@
 {
   "production": {
     "username": "root",
-    "password": "3u64U8Ft1mE2",
+    "password": "Ckq9B1038h4Z",
     "database": "mysql",
     "host": "infra.zeabur.com",
-    "port":"30504",
+    "port":"31566",
     "dialect": "mysql"
   },
   "test": {
