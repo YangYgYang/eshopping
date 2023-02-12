@@ -32,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     sort: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Category',
-    tableName: 'Categories',
+    modelName: 'category',
+    tableName: 'categories',
     underscored: true
   })
   return Category

@@ -38,8 +38,8 @@ module.exports = (sequelize, DataTypes) => {
     img: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Products',
-    tableName: 'Products',
+    modelName: 'products',
+    tableName: 'products',
     underscored: true
   })
   return Products
