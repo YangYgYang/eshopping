@@ -21,7 +21,7 @@ module.exports = {
         short_des: '受損肌膚使用',
         discount: 80,
         description:'先使用茶樹保濕，再使用調理乳液',
-        // category_id:2,
+        category_id:2,
         sales:5,
         img:null,
         created_at: new Date(),
