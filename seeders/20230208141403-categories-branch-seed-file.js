@@ -52,10 +52,10 @@ module.exports = {
         updated_at: new Date()
       },
     ]
-    await queryInterface.bulkInsert('Categories', categoriesSeed)
+    await queryInterface.bulkInsert('categories', categoriesSeed)
   },
 
   down: async(queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Categories', {})
+    await queryInterface.bulkDelete('categories', {})
   }
 };
