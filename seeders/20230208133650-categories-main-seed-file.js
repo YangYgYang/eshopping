@@ -66,14 +66,14 @@ module.exports = {
   },
 
   down: async(queryInterface, Sequelize) => {
-		const { sequelize } = queryInterface
-		try {
-			await sequelize.transaction(async transaction => {
-				const options = { transaction }
-				await sequelize.query('TRUNCATE TABLE Categories', options)
-			})
-		} catch (error) {
-			console.log(error)
-		}
+		// const { sequelize } = queryInterface
+		// try {
+		// 	await sequelize.transaction(async transaction => {
+		// 		const options = { transaction }
+		// 		await sequelize.query('TRUNCATE TABLE Categories', options)
+		// 	})
+		// } catch (error) {
+		// 	console.log(error)
+		// }
   }
 };
