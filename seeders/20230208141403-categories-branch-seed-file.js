@@ -56,6 +56,14 @@ module.exports = {
   },
 
   down: async(queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('categories', {})
+		const { sequelize } = queryInterface
+		try {
+			await sequelize.transaction(async transaction => {
+				const options = { transaction }
+				await sequelize.query('TRUNCATE TABLE categories', options)
+			})
+		} catch (error) {
+			console.log(error)
+		}
   }
 };
