@@ -21,9 +21,9 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class Category extends Model {
-    static associate (models) {
-      Category.hasMany(models.Products, { foreignKey: 'categoryId' })
-    }
+    // static associate (models) {
+    //   Category.hasMany(models.Products, { foreignKey: 'categoryId' })
+    // }
   };
   Category.init({
     name: DataTypes.STRING,
