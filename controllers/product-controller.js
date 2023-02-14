@@ -57,18 +57,30 @@ const productController = {
             message: err
         })})
     },
-    getProduct: (req, res, next) => {
-        const ParamProduct = req.query.id
-        return Products.findByPK(ParamProduct)
-        .then((product)=>{
+    getProduct: async(req, res, next) => {
+        const ParamProduct = req.params.id
+        console.log(ParamProduct)
+        try{
+            //findByPk不知道為何不行
+            const product = await Products.findOne({where:{id:ParamProduct}})
             console.log(product)
             res.status(200).json({
                 product
-        })})
-        .catch(err => {
-            res.status(401).json({
-            message: err
-        })})
+            })
+
+        }
+        catch (err) { next(err) }
+
+        // return Products.findByPK(ParamProduct)
+        // .then((product)=>{
+        //     console.log(product)
+        //     res.status(200).json({
+        //         product
+        // })})
+        // .catch(err => {
+        //     res.status(401).json({
+        //     message: err
+        // })})
     }
 }
 
