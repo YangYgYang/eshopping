@@ -1,5 +1,5 @@
 const { Op } = require("sequelize")
-const { Products,categories } = require('../models')
+const { Products,Categories } = require('../models')
 const { body, validationResult } = require('express-validator')
 
 const productController = {
@@ -10,7 +10,7 @@ const productController = {
         const state = {}
         const page = {}
         if(ParamCategory){
-            return categories.findByPK(ParamCategory)
+            return Categories.findByPK(ParamCategory)
         }
         if( req.query.kind === "newest" ){
             //though we only need to order by one column, we still need to put the ordering array inside the order array
@@ -59,28 +59,58 @@ const productController = {
     },
     getProduct: async(req, res, next) => {
         const ParamProduct = req.params.id
-        console.log(ParamProduct)
         try{
             //findByPk不知道為何不行
             const product = await Products.findOne({where:{id:ParamProduct}})
-            console.log(product)
             res.status(200).json({
                 product
             })
 
         }
         catch (err) { next(err) }
-
-        // return Products.findByPK(ParamProduct)
-        // .then((product)=>{
-        //     console.log(product)
-        //     res.status(200).json({
-        //         product
-        // })})
-        // .catch(err => {
-        //     res.status(401).json({
-        //     message: err
-        // })})
+    },
+    //拿到分類系列的產品
+    getCategoryProduct: async(req, res, next) => {
+        const ParamCategory = req.params.id
+        let productData
+        let selectCategory = []
+        try{
+            const category = await Categories.findOne({
+                nest: true,
+				raw: true,
+                where:{id:ParamCategory}
+            })
+            //若為第一層(父層)分類的話
+            if(category.parent_id === 0){
+                const categoryChild = await Categories.findAll({
+                    nest: true,
+                    raw: true,
+                    where:{parent_id:ParamCategory}
+                }
+                    )
+                    for(let i = 0; i<categoryChild.length;i++){
+                        selectCategory.push({category_id:categoryChild[i].id})
+                    }
+                    let product = await Products.findAll({
+                        nest: true,
+                        raw: true,
+                        where: {
+                            [Op.or]: selectCategory
+                    }})
+                    productData = product
+            }else{
+                const product = await Products.findAll({
+                    nest: true,
+                    raw: true,
+                    where:{category_id:ParamCategory}
+                })
+                productData = product
+            }
+            res.status(200).json({
+                productData
+            })
+        }
+        catch (err) { next(err) }
     }
 }
 

@@ -6,7 +6,7 @@ module.exports = {
       {
         name: '乳液',
         img: null,
-        parent_id: 0,
+        parent_id: 1,
         sort: 1,
         created_at: new Date(),
         updated_at: new Date()

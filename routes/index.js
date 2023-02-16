@@ -15,6 +15,7 @@ router.use('/admin', admin)
 //get會員id歷史評論＆歷史訂單也要擋
 
 //一般瀏覽頁面，不用擋驗證即可瀏覽
+router.get('/api/products/category/:id',productController.getCategoryProduct)
 router.get('/api/products',productController.getProducts)
 router.get('/api/product/:id',productController.getProduct)
 router.get('/api/categories/:type',categoryController.getCategories)
