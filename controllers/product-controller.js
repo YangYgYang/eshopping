@@ -69,7 +69,7 @@ const productController = {
         }
         catch (err) { next(err) }
     },
-    //拿到分類系列的產品
+    //拿到分類系列的所有產品
     getCategoryProduct: async(req, res, next) => {
         const ParamCategory = req.params.id
         let productData
@@ -86,19 +86,21 @@ const productController = {
                     nest: true,
                     raw: true,
                     where:{parent_id:ParamCategory}
-                }
-                    )
-                    for(let i = 0; i<categoryChild.length;i++){
+                })
+
+                //將選擇到的父層類別之下所有子類別的id拿出來，後面要用此陣列找products
+                for(let i = 0; i<categoryChild.length;i++){
                         selectCategory.push({category_id:categoryChild[i].id})
-                    }
-                    let product = await Products.findAll({
-                        nest: true,
-                        raw: true,
-                        where: {
-                            [Op.or]: selectCategory
-                    }})
-                    productData = product
-            }else{
+                }
+
+                const product = await Products.findAll({
+                    nest: true,
+                    raw: true,
+                    where: {
+                        [Op.or]: selectCategory
+                }})
+                productData = product
+            } else {
                 const product = await Products.findAll({
                     nest: true,
                     raw: true,
