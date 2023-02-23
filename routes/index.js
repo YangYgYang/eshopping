@@ -10,7 +10,7 @@ router.use('/admin', admin)
 
 //***需登入會員才可瀏覽之頁面
 //post留言
-router.get('/api/comment/:product_id',commentController.getComments)
+router.get('/api/comment',commentController.getComments)
 router.post('/api/comment/:product_id',commentController.postComments)
 //post結帳(訂單快照)就要開始擋
 //post確認訂單(第2層訂單快照？)也要擋

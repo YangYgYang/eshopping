@@ -1,12 +1,17 @@
 const { Op } = require("sequelize")
-const { Products,Categories, } = require('../models')
+const { Products,Categories, Comments} = require('../models')
 
 const commentController = {
-    getComments:(req, res, next) =>{
-        const productId = req.params.product_id
-        console.log(productId)
+    getComments: async (req, res, next) =>{
+        const productId = req.query.product_id
+        const productComment = await Comments.findAll({
+            nest: true,
+            raw: true,
+            where:{ product_id:productId }
+        })
+        console.log(productComment)
         res.status(200).json(
-            'product'
+            productComment
         )
     },
     postComments:(req, res, next) =>{
