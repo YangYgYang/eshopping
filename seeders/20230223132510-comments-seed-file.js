@@ -21,7 +21,6 @@ module.exports = {
           product_id: productData[Math.floor(Math.random() * productData.length)].id
         })
       }
-      console.log('await前')
       await queryInterface.bulkInsert('comments',commentSeed)
 
   },
