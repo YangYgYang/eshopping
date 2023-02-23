@@ -4,7 +4,6 @@ const faker = require('@faker-js/faker')
 
 module.exports = {
   up: async(queryInterface, Sequelize) => {
-    console.log('最前')
       const productData = await Products.findAll(
         { 
           nest: true,
@@ -12,16 +11,14 @@ module.exports = {
           attributes:['id']
       }
       )
-      console.log('二',productData)
       const commentSeed = []
-      console.log('三')
       for(let i = 1;i<11;i++){
         commentSeed.push({
-          content: '222',
+          content: '太棒了！',
           score: Math.round(Math.random() * 4 + 1),
           created_at: new Date(),
           updated_at: new Date(),
-          product_id: productData[Math.round(Math.random() * productData.length)].id
+          product_id: productData[Math.floor(Math.random() * productData.length)].id
         })
       }
       console.log('await前')
