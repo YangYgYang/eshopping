@@ -9,7 +9,6 @@ const commentController = {
             raw: true,
             where:{ product_id:productId }
         })
-        console.log(productComment)
         res.status(200).json(
             productComment
         )
